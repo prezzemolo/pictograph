@@ -33,7 +33,7 @@ pack().then(r => {
             if (! force) return
         }
     } catch (e) {
-        console.dir(e)
+        // nothing do
     }
 
     // index.js
