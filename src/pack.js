@@ -26,7 +26,7 @@ module.exports = async () => {
         if (emoji === undefined) return
 
         /**
-         * drop over 2 characters emoji.
+         * drop over 2 characters emoji. (include ligature)
          * for support surrogate pair, referenced
          *     http://qiita.com/sounisi5011/items/aa2d747322aad4850fe7#%E5%88%A5%E3%81%AE%E6%96%B9%E6%B3%95.
          */ 
