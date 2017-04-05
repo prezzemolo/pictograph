@@ -1,7 +1,9 @@
 pictograph
 =====
 [![][mit-badge]][mit]  
-minimalized gemoji dictionaly.
+minimalized gemoji dictionaly.  
+reduce gemoji size by up to 90%. (300KB to 20KB)  
+include emojis of only one char.
 
 Installation
 -----
