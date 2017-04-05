@@ -1,6 +1,6 @@
 pictograph
 =====
-[![][mit-badge]][mit]  
+[![][mit-badge]][mit] [![][npm-badge]][npm]  
 minimalized gemoji dictionaly.  
 reduce gemoji size by up to 90%. (300KB to 20KB)  
 include emojis of only one char.
@@ -25,3 +25,5 @@ The MIT License. See [LICENSE](LICENSE).
 
 [mit]: http://opensource.org/licenses/MIT
 [mit-badge]:https://img.shields.io/badge/license-MIT-444444.svg?style=flat-square
+[npm]: https://www.npmjs.com/package/pictograph
+[npm-badge]: https://badge.fury.io/js/pictograph.svg

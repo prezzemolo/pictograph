@@ -4,7 +4,7 @@
   "description": "minimalized gemoji dictionaly.",
   "main": "./release/index.js",
   "scripts": {
-    "build": "node ./src/index.js --force"
+    "build": "node ./src/index.js"
   },
   "repository": {
     "type": "git",
