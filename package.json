@@ -1,0 +1,16 @@
+{
+  "name": "pictograph",
+  "version": "0.0.0",
+  "description": "minimalized gemoji dictionaly.",
+  "main": "./release/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prezzemolo/pictograph.git"
+  },
+  "author": "prezzemolo <git@prezzemolo.ga>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prezzemolo/pictograph/issues"
+  },
+  "homepage": "https://github.com/prezzemolo/pictograph#readme"
+}
