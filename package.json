@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "minimalized gemoji dictionaly.",
   "main": "./release/index.js",
+  "scripts": {
+    "build": "node ./src/index.js --force"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/prezzemolo/pictograph.git"
