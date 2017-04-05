@@ -13,7 +13,8 @@ Example
 -----
 ```js
 const pictograph = require("pictograph")
-console.log(pictograph["100"]) // 💯
+console.log(pictograph.dic["100"]) // 💯
+console.log(pictograph.version) // 934ac9a22086f694b6954b7d88ef44f0
 ```
 
 License

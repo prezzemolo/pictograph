@@ -1,5 +1,11 @@
 const pack = require("./pack")
 const fs = require("fs")
+const path = require("path")
+
+// source directory path
+const current = path.dirname(__filename)
+const baseDir = path.join(current, "..")
+const releaseDir = path.join(baseDir, "release")
 
 // force mode
 let force = false
@@ -18,9 +24,28 @@ pack().then(r => {
         if (e.code !== 'EEXIST') throw e
     }
 
+    // if already saved dic, indicate
+    try {
+        const pictograph = require(path.join(releaseDir, "index.js"))
+        if (pictograph.version === hash) {
+            console.log(`minimalized gemoji's emoji.json (${hash}) has been created.`)
+            // not force mode, exit.
+            if (! force) return
+        }
+    } catch (e) {
+        console.dir(e)
+    }
+
+    // index.js
+    const index = `\
+exports.dic = require("./pictograph.json")
+exports.version = "${hash}"
+`
+
     // save
     try {
-        fs.writeFileSync("./release/pictograph.json", JSON.stringify(emojis))
+        fs.writeFileSync(path.join(releaseDir, "pictograph.json"), JSON.stringify(emojis))
+        fs.writeFileSync(path.join(releaseDir, "index.js"), index)
         console.log(`successfully create minimalized gemoji's emoji.json (${hash}).`)
     } catch (e) {
         console.dir(e)
