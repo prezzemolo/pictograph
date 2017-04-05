@@ -9,9 +9,9 @@ module.exports = async () => {
     if (result.statusCode !== 200) throw ("ah~~~~")
 
     // calculate md5 hash
-    const hash = crypto.createHash("md5");
+    const hash = crypto.createHash("sha1");
     hash.update(result.data)
-    const md5hash = hash.digest("hex")
+    const sha1hash = hash.digest("hex")
 
     // parse to JavaScript object
     const emojis = JSON.parse(result.data)
@@ -38,5 +38,5 @@ module.exports = async () => {
     })
 
     // return array, first md5 hash, second responce object.
-    return [md5hash, responce]
+    return [sha1hash, responce]
 }
