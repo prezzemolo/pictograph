@@ -1,6 +1,6 @@
 pictograph
 =====
-[![][mit-badge]][mit] [![][npm-badge]][npm] [![][travis-badge]][travis]  
+[![][mit-badge]][mit] [![][npm-badge]][npm] [![][travis-badge]][travis] [![][greenkeeper-badge]][greenkeeper]  
 minimalized gemoji dictionaly.  
 reduced size by up to 90%, 300 KB to 20 KB.  
 this module doesn't include ligatures emoji.
@@ -39,3 +39,5 @@ The MIT License. See [LICENSE](LICENSE).
 [npm-badge]: https://badge.fury.io/js/pictograph.svg
 [travis]: https://travis-ci.org/prezzemolo/pictograph/
 [travis-badge]: https://travis-ci.org/prezzemolo/pictograph.svg?branch=master
+[greenkeeper]: https://greenkeeper.io/
+[greenkeeper-badge]: https://badges.greenkeeper.io/prezzemolo/pictograph.svg
