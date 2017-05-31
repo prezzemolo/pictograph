@@ -1,55 +1,35 @@
-const pack = require("./pack")
-const fs = require("fs")
-const path = require("path")
+const pack = require('./pack')
+const {saver, makor, checker} = require('./tools/async-fs')
+const render = require('./tools/render-template')
+const path = require('path')
 
 // source directory path
 const current = path.dirname(__filename)
-const baseDir = path.join(current, "..")
-const releaseDir = path.join(baseDir, "release")
+const base = path.join(current, '..')
+const release = path.join(base, 'release')
+const templates = path.join(current, 'templates')
 
 // force mode
-let force = false
-process.argv.forEach(current => {
-    if ("--force" === current) force = true
-})
+const force = process.argv[2] === '--force'
 
-pack().then(r => {
-    const hash = r[0]
-    const emojis = r[1]
-
-    // create release folder
-    try {
-       fs.mkdirSync("release") 
-    } catch (e) {
-        if (e.code !== 'EEXIST') throw e
-    }
-
-    // if already saved dic, indicate
-    try {
-        const pictograph = require(path.join(releaseDir, "index.js"))
-        if (pictograph.version === hash) {
-            console.log(`minimalized gemoji's emoji.json (${hash}) has been created.`)
-            // not force mode, exit.
-            if (! force) return
-        }
-    } catch (e) {
-        // nothing do
-    }
-
-    // index.js
-    const index = `\
-exports.dic = require("./pictograph.json")
-exports.version = "${hash}"
-`
-
+const main = async () => {
+    const [hash, emoji] = await pack()
+    // create release directory
+    await makor(release)
+    // duplicate check
+    if (!force && await checker(path.join(release, 'index.js')) && require(release).version === hash)
+        throw new Error(`minimalized emoji.json has been generated from gemoji ${hash}.`)
+    // render index.js.tpl
+    const index = await render(path.join(templates, 'index.js.tpl'), {
+        version: hash
+    })
     // save
-    try {
-        fs.writeFileSync(path.join(releaseDir, "pictograph.json"), JSON.stringify(emojis))
-        fs.writeFileSync(path.join(releaseDir, "index.js"), index)
-        console.log(`successfully create minimalized gemoji's emoji.json (${hash}).`)
-    } catch (e) {
-        console.dir(e)
-    }
-}).catch(e => {
-    console.dir(e)
+    await saver(path.join(release, 'index.js'), index)
+    await saver(path.join(release, 'pictograph.json'), JSON.stringify(emoji))
+    console.log(`successfully create minimalized emoji.json generated from gemoji (${hash}).`)
+}
+
+main().catch(reason => {
+    console.error(reason.stack)
+    process.exit(1)
 })
