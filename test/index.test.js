@@ -2,11 +2,11 @@ const assert = require('assert')
 const pictograph = require('..')
 
 describe('pictograph', () => {
-    describe('decoder', () => {
+    describe('decode', () => {
         // ':+1:'
         it(`should return '👍' when the value is ':+1:'`, () => {
             assert.equal(
-                pictograph.decoder(':+1:'),
+                pictograph.decode(':+1:'),
                 '👍'
             )
         })
@@ -14,7 +14,7 @@ describe('pictograph', () => {
         // ':+5000000000000:'
         it(`should return ':+5000000000000:' when the value is ':+5000000000000:'`, () => {
             assert.equal(
-                pictograph.decoder(':+5000000000000:'),
+                pictograph.decode(':+5000000000000:'),
                 ':+5000000000000:'
             )
         })
@@ -22,7 +22,7 @@ describe('pictograph', () => {
         // ':100: :+1: :-1: :+5000000000000:'
         it(`should return '💯 👍 👎 :+5000000000000:' when the value is ':100: :+1: :-1: :+5000000000000:'`, () => {
             assert.equal(
-                pictograph.decoder(':100: :+1: :-1: :+5000000000000:'),
+                pictograph.decode(':100: :+1: :-1: :+5000000000000:'),
                 '💯 👍 👎 :+5000000000000:'
             )
         })
@@ -30,7 +30,7 @@ describe('pictograph', () => {
         // 'lgtm :+1:'
         it(`should return 'lgtm 👍' when the valus is 'lgtm :+1:'`, () => {
             assert.equal(
-                pictograph.decoder('lgtm :+1:'),
+                pictograph.decode('lgtm :+1:'),
                 'lgtm 👍'
             )
         })
@@ -38,7 +38,7 @@ describe('pictograph', () => {
         // 'yo'
         it(`should return 'yo' when the value is 'yo'`, () => {
             assert.equal(
-                pictograph.decoder('yo'),
+                pictograph.decode('yo'),
                 'yo'
             )
         })
@@ -46,7 +46,7 @@ describe('pictograph', () => {
         // null
         it(`should return null when the value is null`, () => {
             assert.equal(
-                pictograph.decoder(null),
+                pictograph.decode(null),
                 null
             )
         })

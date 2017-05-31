@@ -17,7 +17,7 @@ Example
 const pictograph = require("pictograph")
 console.log(pictograph.dic["100"]) // 💯
 console.log(pictograph.version) // d9624f34f8bccebdfe69ae8508ba157995d0b320
-console.log(pictograph.decoder(":+1:")) // 👍
+console.log(pictograph.decode(":+1:")) // 👍
 ```
 
 License
