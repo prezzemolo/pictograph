@@ -1,9 +1,9 @@
 pictograph
 =====
-[![][mit-badge]][mit] [![][npm-badge]][npm]  
+[![][mit-badge]][mit] [![][npm-badge]][npm] [![][travis-badge]][travis]  
 minimalized gemoji dictionaly.  
-reduce gemoji size by up to 90%. (300KB to 20KB)  
-include emojis of only one char.
+reduced size by up to 90%, 300 KB to 20 KB.  
+this module doesn't include ligatures emoji.
 
 Installation
 -----
@@ -16,7 +16,8 @@ Example
 ```js
 const pictograph = require("pictograph")
 console.log(pictograph.dic["100"]) // 💯
-console.log(pictograph.version) // 934ac9a22086f694b6954b7d88ef44f0
+console.log(pictograph.version) // d9624f34f8bccebdfe69ae8508ba157995d0b320
+console.log(pictograph.decoder(":+1:")) // 👍
 ```
 
 License
@@ -27,3 +28,5 @@ The MIT License. See [LICENSE](LICENSE).
 [mit-badge]:https://img.shields.io/badge/license-MIT-444444.svg?style=flat-square
 [npm]: https://www.npmjs.com/package/pictograph
 [npm-badge]: https://badge.fury.io/js/pictograph.svg
+[travis]: https://travis-ci.org/prezzemolo/pictograph/
+[travis-badge]: https://travis-ci.org/prezzemolo/pictograph.svg?branch=master
