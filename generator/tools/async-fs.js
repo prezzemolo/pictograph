@@ -1,4 +1,4 @@
-const fs = require("fs")
+const fs = require('fs')
 
 /**
  * saver: async wrapper of fs.writeFile
@@ -8,10 +8,10 @@ const fs = require("fs")
  * @return {Promise<void>}
  */
 exports.saver = (path, data) => new Promise((resolve, reject) => {
-    fs.writeFile(path, data, err => {
-        if (err) return reject(err)
-        resolve()
-    })
+  fs.writeFile(path, data, err => {
+    if (err) return reject(err)
+    resolve()
+  })
 })
 
 /**
@@ -21,10 +21,10 @@ exports.saver = (path, data) => new Promise((resolve, reject) => {
  * @return {Promise<Buffer>}
  */
 exports.loader = path => new Promise((resolve, reject) => {
-    fs.readFile(path, (err, data) => {
-        if (err) return reject(err)
-        resolve(data)
-    })
+  fs.readFile(path, (err, data) => {
+    if (err) return reject(err)
+    resolve(data)
+  })
 })
 
 /**
@@ -34,11 +34,11 @@ exports.loader = path => new Promise((resolve, reject) => {
  * @return {Promise<boolean>} false when directory already exists
  */
 exports.makor = path => new Promise((resolve, reject) => {
-    fs.mkdir(path, err => {
-        if (!err) return resolve(true)
-        if (err.code !== 'EEXIST') return reject(err)
-        resolve(false)
-    })
+  fs.mkdir(path, err => {
+    if (!err) return resolve(true)
+    if (err.code !== 'EEXIST') return reject(err)
+    resolve(false)
+  })
 })
 
 /**
@@ -48,7 +48,7 @@ exports.makor = path => new Promise((resolve, reject) => {
  * @return {Promise<boolean>} whether existence
  */
 exports.checker = path => new Promise((resolve, reject) => {
-    fs.stat(path, (err, stats) => {
-        resolve(err ? false : true)
-    })
+  fs.stat(path, (err, stats) => {
+    resolve(!err)
+  })
 })
