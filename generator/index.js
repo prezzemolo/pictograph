@@ -18,7 +18,7 @@ const main = async () => {
   await makor(release)
   // duplicate check
   if (!force && await checker(path.join(release, 'index.js')) && require(release).version === commit) {
-    return console.log(`minimalized emoji.json has been generated from gemoji, the commit hash ${commit}.`)
+    return console.log(`already generated from gemoji, the commit hash ${commit}.`)
   }
   // render index.js.tpl
   const index = await render(path.join(templates, 'index.js.tpl'), {
