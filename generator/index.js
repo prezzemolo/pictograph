@@ -23,11 +23,11 @@ const main = async () => {
   // render index.js.tpl
   const index = await render(path.join(templates, 'index.js.tpl'), {
     version: commit,
-    hash
+    hash,
+    emoji
   })
   // save
   await saver(path.join(release, 'index.js'), index)
-  await saver(path.join(release, 'pictograph.json'), JSON.stringify(emoji))
   console.log(`successfully create minimalized emoji.json generated from gemoji, the commit hash ${commit}.`)
 }
 

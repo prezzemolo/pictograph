@@ -52,8 +52,8 @@ module.exports = async () => {
   const buffer = Buffer.from(content, encoding)
   const gemoji = JSON.parse(buffer.toString())
 
-  // response dict object
-  const res = {}
+  // response string
+  let res = ''
 
   // pack it
   gemoji.forEach(current => {
@@ -68,8 +68,10 @@ module.exports = async () => {
      */
     if (emoji.split(/(?![\uDC00-\uDFFF])/).length !== 1) return
 
-    current.aliases.forEach(current => {
-      res[current] = emoji
+    current.aliases.forEach(alias => {
+      // check wheter alias is valid javaScript identifier
+      const name = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(alias) ? alias : `"${alias}"`
+      res += `${name}:"${emoji}",`
     })
   })
 
