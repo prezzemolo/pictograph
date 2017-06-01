@@ -52,10 +52,8 @@ module.exports = async () => {
   const buffer = Buffer.from(content, encoding)
   const gemoji = JSON.parse(buffer.toString())
 
-  // response string
-  let res = ''
-
   // pack it
+  let res = ''
   gemoji.forEach(current => {
     const {emoji} = current
     // oh, not Unicode's emoji (trollface etc)
@@ -74,9 +72,10 @@ module.exports = async () => {
       res += `${name}:"${emoji}",`
     })
   })
+  // cut unneed comma
   const emoji = res.slice(0, -1)
 
-  // return packed object.
+  // return packed object
   return {
     commit,
     hash,
