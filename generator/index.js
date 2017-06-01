@@ -13,12 +13,12 @@ const templates = path.join(current, 'templates')
 const force = process.argv[2] === '--force'
 
 const main = async () => {
-  const [hash, emoji] = await pack()
+  const {hash, emoji} = await pack()
   // create release directory
   await makor(release)
   // duplicate check
   if (!force && await checker(path.join(release, 'index.js')) && require(release).version === hash) {
-    throw new Error(`minimalized emoji.json has been generated from gemoji ${hash}.`)
+    return console.log(`minimalized emoji.json has been generated from gemoji ${hash}.`)
   }
   // render index.js.tpl
   const index = await render(path.join(templates, 'index.js.tpl'), {

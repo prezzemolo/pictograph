@@ -3,24 +3,24 @@ const crypto = require('crypto')
 
 module.exports = async () => {
   // get gemoji json
-  const result = await request('https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json')
+  const {data, statusCode} = await request('https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json')
 
   // statusCode isn't 200
-  if (result.statusCode !== 200) throw new Error('status code is not 200')
+  if (statusCode !== 200) throw new Error('status code is not 200')
 
   // calculate md5 hash
   const hash = crypto.createHash('sha1')
-  hash.update(result.data)
+  hash.update(data)
   const sha1hash = hash.digest('hex')
 
   // parse to JavaScript object
-  const emojis = JSON.parse(result.data)
+  const gemoji = JSON.parse(data)
 
-  // responce dict object
-  const responce = {}
+  // response dict object
+  const res = {}
 
   // pack it
-  emojis.forEach(current => {
+  gemoji.forEach(current => {
     const emoji = current.emoji
     // oh, not Unicode's emoji (trollface etc)
     if (emoji === undefined) return
@@ -33,10 +33,13 @@ module.exports = async () => {
     if (emoji.split(/(?![\uDC00-\uDFFF])/).length !== 1) return
 
     current.aliases.forEach(current => {
-      responce[current] = emoji
+      res[current] = emoji
     })
   })
 
-  // return array, first md5 hash, second responce object.
-  return [sha1hash, responce]
+  // return packed object.
+  return {
+    hash: sha1hash,
+    emoji: res
+  }
 }
