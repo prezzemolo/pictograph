@@ -20,6 +20,15 @@ console.log(pictograph.version) // d9624f34f8bccebdfe69ae8508ba157995d0b320
 console.log(pictograph.decode(":+1:")) // 👍
 ```
 
+Properties
+-----
+name|type|description
+---|---|---
+dic|object|minimalized gemoji dictionaly
+version|string|latest git commit hash of gemoji database
+hash|string|git object hash of gemoji database
+decode|function|emoji code decoder
+
 License
 -----
 The MIT License. See [LICENSE](LICENSE).

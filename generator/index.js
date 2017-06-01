@@ -13,21 +13,22 @@ const templates = path.join(current, 'templates')
 const force = process.argv[2] === '--force'
 
 const main = async () => {
-  const {hash, emoji} = await pack()
+  const {commit, hash, emoji} = await pack()
   // create release directory
   await makor(release)
   // duplicate check
-  if (!force && await checker(path.join(release, 'index.js')) && require(release).version === hash) {
-    return console.log(`minimalized emoji.json has been generated from gemoji ${hash}.`)
+  if (!force && await checker(path.join(release, 'index.js')) && require(release).version === commit) {
+    return console.log(`minimalized emoji.json has been generated from gemoji, the commit hash ${commit}.`)
   }
   // render index.js.tpl
   const index = await render(path.join(templates, 'index.js.tpl'), {
-    version: hash
+    version: commit,
+    hash
   })
   // save
   await saver(path.join(release, 'index.js'), index)
   await saver(path.join(release, 'pictograph.json'), JSON.stringify(emoji))
-  console.log(`successfully create minimalized emoji.json generated from gemoji (${hash}).`)
+  console.log(`successfully create minimalized emoji.json generated from gemoji, the commit hash ${commit}.`)
 }
 
 main().catch(reason => {

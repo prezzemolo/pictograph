@@ -1,27 +1,63 @@
 const request = require('./tools/request')
-const crypto = require('crypto')
+
+/**
+ * wrapper of request, parse JSON data
+ * @param {string} url request url
+ */
+const JSONrequest = async url => {
+  const response = await request(url)
+  return Object.assign(
+    {},
+    response,
+    {
+      data: JSON.parse(response.data)
+    }
+  )
+}
 
 module.exports = async () => {
-  // get gemoji json
-  const {data, statusCode} = await request('https://raw.githubusercontent.com/github/gemoji/master/db/emoji.json')
+  // url encorded gemoji database filename
+  const target = encodeURIComponent('db/emoji.json')
 
-  // statusCode isn't 200
-  if (statusCode !== 200) throw new Error('status code is not 200')
-
-  // calculate md5 hash
-  const hash = crypto.createHash('sha1')
-  hash.update(data)
-  const sha1hash = hash.digest('hex')
-
-  // parse to JavaScript object
-  const gemoji = JSON.parse(data)
+  /**
+   * get informations & contents
+   * from GitHub Repositories REST API v3
+   * https://developer.github.com/v3/repos/
+   */
+  // get informations
+  const {
+    data: {
+      commits_url: commitsUrl,
+      contents_url: contentsUrl
+    }
+  } = await JSONrequest('https://api.github.com/repos/github/gemoji')
+  // get the latest git commit hash of gemoji database on default branch
+  const {
+    data: [
+      {
+        sha: commit
+      }
+    ]
+  } = await JSONrequest(commitsUrl.replace('{/sha}', `?path=${target}`))
+  // get the content of gemoji database
+  const {
+    data: {
+      encoding,
+      // git object hash
+      sha: hash,
+      content
+    }
+  } = await JSONrequest(contentsUrl.replace('{+path}', target))
+  // decode the content & parse
+  const buffer = Buffer.from(content, encoding)
+  const gemoji = JSON.parse(buffer.toString())
 
   // response dict object
   const res = {}
 
   // pack it
   gemoji.forEach(current => {
-    const emoji = current.emoji
+    const {emoji} = current
     // oh, not Unicode's emoji (trollface etc)
     if (emoji === undefined) return
 
@@ -39,7 +75,8 @@ module.exports = async () => {
 
   // return packed object.
   return {
-    hash: sha1hash,
+    commit,
+    hash,
     emoji: res
   }
 }
