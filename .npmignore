@@ -1,3 +1,6 @@
-/node_modules
-/src
-npm-debug.log
+/*
+
+!/release
+!/LICENSE
+!/package.json
+!/README.md
