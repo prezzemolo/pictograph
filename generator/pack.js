@@ -74,11 +74,12 @@ module.exports = async () => {
       res += `${name}:"${emoji}",`
     })
   })
+  const emoji = res.slice(0, -1)
 
   // return packed object.
   return {
     commit,
     hash,
-    emoji: res
+    emoji
   }
 }
