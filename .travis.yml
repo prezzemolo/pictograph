@@ -2,9 +2,17 @@ language: node_js
 dist: trusty
 sudo: false
 env:
-  - DEBUG=pictograph:*
+- DEBUG=pictograph:*
+deploy:
+  provider: npm
+  email: contact@prezzemolo.ga
+  api_key:
+    secure: Kjkv25eg4mh4QL6dZOcSHNc2qAbzGR/RL1EZq+hCfNUhXKPGEwtFGFtt8uRpDUgp0xxXffmcAM4EJYtpZ8dPwjMKLWOJJwPRKoJgGF5Z6C1oUckgK4ZbU7MCPrrflN6RkHlLrj9LZkHrQ4i4xGKLpdQ7D2PIGtn0lNpZ4726TKntcrRV1SK3Il60iHlrCTqKwWwe0AnKRe8/F/SPbMWssp4AGKDDT94VzkItNs0qN7IUAAC2iDs4Q8X+OQnh3Of4oQ5wkihHOPAWMt3QI6kH6i+eoVc1vor2771NiL143wDeRiLJMdlhRjVBP0X6ASocylNmxUR3zfG3UsHdzu6flijnQuXZ9TE58RQ200x9w8ylq9E4Mwlh/awv4n3HNxVlhmxaYQivqQloOvSZLYsw+9ZcYsbe2rvMHuJ9N7wCSeUs0kGperqEjg7FitHpBf4WsD1a0UkMCt7CnAplPiN5Gpl1d0VQVnjsyZu9eXk0NkueHdkmQaAK40aY1WC+ktZuE2wOto1xFHJKPg5F3vOZUxcAN8HJRjPkL0n1XM/2Q8mtg9C0jB8wzV3jWLNCKAC+RNrC9+kLSDDFJR2HB+5JhYGVUVqmK7RCEmwRoSkfDXSD/pMR69vxaZvP9NsFQHWoTN4QemkWMaI4RzqZGXrPwiwiUCq2bKA/rM/F1TjGJ/0=
+  on:
+    tags: true
+    repo: prezzemolo/pictograph
 node_js:
-  - node
+- node
 cache:
-  - node_modules
-  - release
+- node_modules
+- release
