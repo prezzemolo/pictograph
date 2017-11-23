@@ -4,3 +4,4 @@ node_js:
   - node
 cache:
   - node_modules
+  - release
