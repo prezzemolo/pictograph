@@ -16,10 +16,9 @@ deploy:
   skip_cleanup: true
 jobs:
   include:
-    tag:
+    - stage: tag
       script: ./.travis/tag.sh
 stages:
-  - test
   - name: tag
     if: branch = master
 node_js:
