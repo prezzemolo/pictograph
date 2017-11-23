@@ -2,6 +2,8 @@ const pack = require('./pack')
 const {saver, makor, checker} = require('./tools/async-fs')
 const render = require('./tools/render-template')
 const path = require('path')
+const pkg = require('../package.json')
+const debug = require('debug')('pictograph:index')
 
 // source directory path
 const current = path.dirname(__filename)
@@ -17,13 +19,21 @@ const main = async () => {
   // create release directory
   await makor(release)
   // duplicate check
-  if (!force && await checker(path.join(release, 'index.js')) && require(release).version === commit) {
-    return console.log(`already generated from gemoji, the commit hash ${commit}.`)
+  if (
+    !force &&
+      await checker(path.join(release, 'index.js')) &&
+      require(release).version === commit &&
+      require(release).meta &&
+      require(release).meta.version === pkg.version
+  ) {
+    debug('already generated.')
+    return
   }
   // render index.js.tpl
   const index = await render(path.join(templates, 'index.js.tpl'), {
     version: commit,
-    hash
+    hash,
+    mv: pkg.version
   })
   // render pictograph.js.tpl
   const pictograph = await render(path.join(templates, 'pictograph.js.tpl'), {
@@ -32,7 +42,7 @@ const main = async () => {
   // save
   await saver(path.join(release, 'index.js'), index)
   await saver(path.join(release, 'pictograph.js'), pictograph)
-  console.log(`successfully create minimalized emoji.json generated from gemoji, the commit hash ${commit}.`)
+  debug('release files generated successfully.')
 }
 
 main().catch(reason => {

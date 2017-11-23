@@ -15,9 +15,10 @@ Example
 -----
 ```js
 const pictograph = require("pictograph")
-console.log(pictograph.dic["100"]) // 💯
-console.log(pictograph.version) // d9624f34f8bccebdfe69ae8508ba157995d0b320
-console.log(pictograph.decode(":+1:")) // 👍
+console.log(pictograph.dic["100"]) // '💯'
+console.log(pictograph.version) // '61e16ae891b942738a2cf6bda7b3cbe3143d8521'
+console.log(pictograph.decode(":+1:")) // '👍'
+console.log(pictograph.meta.version) // '2.1.0'
 ```
 
 Properties
@@ -25,9 +26,10 @@ Properties
 name|type|description
 ---|---|---
 dic|object|minimalized gemoji dictionaly
-version|string|latest git commit hash of gemoji database
+version|string|git commit hash of contained gemoji database
 hash|string|git object hash of gemoji database
 decode|function|emoji code decoder
+meta.version|string|pictograph pacakge version
 
 License
 -----
