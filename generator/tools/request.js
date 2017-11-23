@@ -12,15 +12,15 @@ const pkg = require('../../package.json')
  * @param {string} url
  * @return {Promise<object>} custom result object that has 3 properties... data, headers and statusCode.
  */
-module.exports = (url) => new Promise((resolve, reject) => {
+module.exports = (url, headers) => new Promise((resolve, reject) => {
   /**
    * pack options
    */
   const urlObj = URL.parse(url)
   const options = {
-    'headers': {
+    'headers': Object.assign({
       'User-Agent': `Mozilla/5.0 (compatible; ${pkg.name}/${pkg.version}; +https://www.npmjs.com/package/${pkg.name})`
-    },
+    }, headers),
     'host': urlObj.hostname,
     'path': urlObj.path
   }

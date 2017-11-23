@@ -6,7 +6,21 @@ const debug = require('debug')('pictograph:pack')
  * @param {string} url request url
  */
 const JSONrequest = async url => {
-  const response = await request(url)
+  const headers = {}
+
+  if (url.startsWith('https://api.github.com') && process.env.GITHUB_API_USER && process.env.GITHUB_API_TOKEN) {
+    const bv = Buffer.from(`${process.env.GITHUB_API_USER}:${process.env.GITHUB_API_TOKEN}`).toString('base64')
+    headers.authorization = `Basic ${bv}`
+  }
+
+  const response = await request(url, headers)
+
+  // show GitHub rate-limit in debug time
+  if (url.startsWith('https://api.github.com')) {
+    [ 'X-RateLimit-Limit', 'X-RateLimit-Remaining', 'X-RateLimit-Reset' ]
+      .forEach(rl => debug(`${rl}: ${response.headers[rl.toLowerCase()]}`))
+  }
+
   if (response.statusCode >= 400) throw new Error(`status: ${response.statusCode}, body: ${response.data || 'no body'}`)
   return Object.assign(
     {},

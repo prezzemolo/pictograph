@@ -15,7 +15,7 @@ const templates = path.join(current, 'templates')
 const force = process.argv[2] === '--force'
 
 const main = async () => {
-  const {commit, hash, emoji} = await pack()
+  const { commit, hash, emoji } = await pack()
   // create release directory
   await makor(release)
   // duplicate check
