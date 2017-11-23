@@ -1,10 +1,26 @@
 language: node_js
 dist: trusty
 sudo: false
+node_js:
+- node
+cache:
+- node_modules
+- release
+
 env:
   global:
     - DEBUG=pictograph:*
     - secure: YVgfJdqixhzspMvnVVo2aLHdP/EoZRVRvGR80cTEIx8+U2nxrVQ+apiU5uYNhXK0eIcsEHdQcZv8qbLk/X/fbNqVNSoa4OTwVGjXuBFMwyTExUpqfodQnetnSUSLhBf0wIgVgQTjeQDiz2hNnwi/g8ofDANgqQEITMjcZ3R+3ADQ7ZtFAKfEYGi0sfMH6ERCKQ/8gvoBucApWMMDn++14nfENMIMWvWCgppu069YCRSWzwYwxWrXUZtQ/Wa66Lx5qmbHWKtcqQVjbJ9OOTSlQbPV+upXfo8x9r/EuGmbgiC71MdVf9+O6A4YKPmW+AebHlE80xDcYbWWZbIQulOQqHL9r+VYHhJRPlx3LX/Ks6Q/7Eeg8DEhSGv7TcqggFMd6z/tx05nalSlIfviqJTdcn3hpxZQ2Bvco+pYN1rualKi2TjO9Kmaop0pCAPHTuoIvM28AnJvDHOLF9oFsGsr6E0qCOe6IgG4zJag6O4KCiPumbCtQNfC9iAGNR/3klSVaDzJ4JehF3/FgxTEBVXETjHHjHKG3S8KSMWWuGkMJOgqfnrF6SkStlNVl/4ALHJQb08l0U3VMjIhGn7/k5Rfw8fnLm5aQr2yVRQ31yjPrOsCuMBPGgg9UxvH5FJ/w5AJpVH6mtgmzMYF/fCjoSGYtL3iLYc6WQnUrlbjgl815Rg=
+
+jobs:
+  include:
+    - stage: tag
+      script: ./.travis/tag.sh
+stages:
+  - test
+  - name: tag
+    if: branch = master
+
 deploy:
   provider: npm
   email: contact@prezzemolo.ga
@@ -14,16 +30,3 @@ deploy:
     tags: true
     repo: prezzemolo/pictograph
   skip_cleanup: true
-jobs:
-  include:
-    - stage: tag
-      script: ./.travis/tag.sh
-stages:
-  - test
-  - name: tag
-    if: branch = master
-node_js:
-- node
-cache:
-- node_modules
-- release
