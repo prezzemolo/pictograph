@@ -4,7 +4,7 @@
 `npm run build`
 
 ## When GitHub API Limit Being Exceed
-You can use [GitHub's personal access token] with environment variables are shown below.
+You can use [GitHub's personal access token](https://github.com/blog/1509-personal-api-tokens) with environment variables are shown below.
 
 name|value
 --|--
