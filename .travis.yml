@@ -15,11 +15,8 @@ env:
 jobs:
   include:
     - stage: tag
+      if: branch = master
       script: ./.travis/tag.sh
-stages:
-  - test
-  - name: tag
-    if: branch = master
 
 deploy:
   provider: npm
