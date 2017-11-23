@@ -4,9 +4,9 @@
   "description": "minimalized gemoji dictionaly.",
   "main": "./release/index.js",
   "scripts": {
-    "generate": "node ./generator/index.js",
-    "test": "mocha && npm run style",
-    "style": "standard 'generator/**/*.js'"
+    "build": "node ./generator/index.js",
+    "test": "npm run build && mocha && npm run lint",
+    "lint": "standard 'generator/**/*.js'"
   },
   "repository": {
     "type": "git",
