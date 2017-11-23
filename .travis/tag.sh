@@ -51,5 +51,5 @@ then
 	git commit -F $c_file
 	git tag $v_release
 	# push it
-	git push origin master $v_release
+	git push git@github.com:prezzemolo/pictograph.git master $v_release
 fi
