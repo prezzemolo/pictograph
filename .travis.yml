@@ -11,6 +11,7 @@ deploy:
   on:
     tags: true
     repo: prezzemolo/pictograph
+  skip_cleanup: true
 node_js:
 - node
 cache:
