@@ -10,7 +10,8 @@ openssl aes-256-cbc \
 	-K $encrypted_a716c936a8d9_key \
 	-iv $encrypted_a716c936a8d9_iv \
 	-in $DIR/id_pictograph.enc \
-	-out $dk
+	-out $dk \
+	-d
 
 # inject git ssh command w/ decrypted deploy key
 export GIT_SSH_COMMAND=`cat << EOC
