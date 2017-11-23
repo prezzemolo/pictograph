@@ -1,4 +1,5 @@
 const request = require('./tools/request')
+const debug = require('debug')('pack')
 
 /**
  * wrapper of request, parse JSON data
@@ -31,6 +32,7 @@ module.exports = async () => {
       contents_url: contentsUrl
     }
   } = await JSONrequest('https://api.github.com/repos/github/gemoji')
+  debug(`commitsUrl: ${commitsUrl}, contentsUrl: ${contentsUrl}`)
   // get the latest git commit hash of gemoji database on default branch
   const {
     data: [
@@ -39,6 +41,7 @@ module.exports = async () => {
       }
     ]
   } = await JSONrequest(commitsUrl.replace('{/sha}', `?path=${target}`))
+  debug(`commit: ${commit}`)
   // get the content of gemoji database
   const {
     data: {

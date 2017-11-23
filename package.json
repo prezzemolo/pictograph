@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/prezzemolo/pictograph#readme",
   "devDependencies": {
+    "debug": "^3.1.0",
     "mocha": "^3.4.2",
     "standard": "^10.0.2"
   }
