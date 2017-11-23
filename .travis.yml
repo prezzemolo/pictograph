@@ -19,6 +19,7 @@ jobs:
     - stage: tag
       script: ./.travis/tag.sh
 stages:
+  - test
   - name: tag
     if: branch = master
 node_js:

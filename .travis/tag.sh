@@ -21,6 +21,9 @@ ssh \
 EOC
 `
 
+# run build
+npm run build
+
 # get gemoji commit from current published version
 c_npm=$(npm info pictograph version | cut -d+ -f2)
 # get gemoji commit from builted
