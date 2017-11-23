@@ -7,6 +7,7 @@ const debug = require('debug')('pack')
  */
 const JSONrequest = async url => {
   const response = await request(url)
+  if (response.statusCode >= 400) throw new Error(`status: ${response.statusCode}, body: ${response.data || 'no body'}`) 
   return Object.assign(
     {},
     response,

@@ -4,7 +4,7 @@ const https = require('https')
 const URL = require('url')
 
 // require package.json for customized user-agent
-const pj = require('../../package.json')
+const pkg = require('../../package.json')
 
 /**
  * http/https request sender.
@@ -19,7 +19,7 @@ module.exports = (url) => new Promise((resolve, reject) => {
   const urlObj = URL.parse(url)
   const options = {
     'headers': {
-      'User-Agent': `Mozilla/5.0 (compatible; ${pj.name}/${pj.version}; +https://www.npmjs.com/package/${pj.name})`
+      'User-Agent': `Mozilla/5.0 (compatible; ${pkg.name}/${pkg.version}; +https://www.npmjs.com/package/${pkg.name})`
     },
     'host': urlObj.hostname,
     'path': urlObj.path
