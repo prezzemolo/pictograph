@@ -1,5 +1,5 @@
 const request = require('./tools/request')
-const debug = require('debug')('pack')
+const debug = require('debug')('pictograph:pack')
 
 /**
  * wrapper of request, parse JSON data
