@@ -17,7 +17,7 @@ function debug () {
 	if [[ $show == true ]]
 	then
 		local now=$(date -uIs)
-		echo "${now:0:-6}Z prezzemolo:tag $@" >&2
+		echo "${now:0:-6}Z pictograph:tag $@" >&2
 	fi
 }
 
@@ -56,14 +56,14 @@ c_built=$(node -e "console.log(require('$DIR/../release').version)")
 debug c_built: $c_built
 c_built_round=$(node -e "console.log(require('$DIR/../release').version.substr(0, 7))")
 debug c_built_round: $c_built_round
-# get current meta package version
-v_meta=$(node -e "console.log(require('$DIR/../package.json').version)" | cut -d+ -f1)
-debug v_meta: $v_meta
+# get current meta package version from npm
+v_current=$(npm info pictograph version --silent)
+debug v_current: $v_current
 
 if [ "$c_tag" != "$c_built_round" ]
 then
 	# generate version will be tagged
-	v_release_pre=$(npm run semver --silent -- $v_meta -i patch)
+	v_release_pre=$(npm run semver --silent -- $v_current -i patch)
 	debug v_release_pre: $v_release_pre
 	v_release="$v_release_pre+$c_built_round"
 	debug v_release: $v_release
