@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eu
+
 IFS=',' A_DEBUG=(${DEBUG:-})
 function debug () {
 	local show=false
@@ -7,7 +9,7 @@ function debug () {
 	for ((i=0; i < ${#A_DEBUG[@]}; i++))
 	do
 		local v=${A_DEBUG[$i]}
-		if [[ $v == '*' ]] || [[ $v == 'pictograph' ]] || [[ $v == 'pictograph:tag' ]]
+		if [[ $v == '*' ]] || [[ $v == 'pictograph' ]] || [[ $v == 'pictograph:*' ]] || [[ $v == 'pictograph:tag' ]]
 		then
 			show=true
 		fi
