@@ -26,7 +26,7 @@ EOC
 npm run build
 
 # get gemoji commit from current published version
-c_npm=$(npm info pictograph version | cut -d+ -f2)
+c_npm=$(npm info pictograph version --silent | cut -d+ -f2)
 # get gemoji commit from builted
 c_built=$(node -e "console.log(require('$DIR/../release').version)")
 c_built_round=$(node -e "console.log(require('$DIR/../release').version.substr(0, 7))")
@@ -35,8 +35,9 @@ v_meta=$(node -e "console.log(require('$DIR/../package.json').version)" | cut -d
 
 if [ "$c_npm" != "$c_built_round" ]
 then
-	# generate version tagged
-	v_release="$v_meta+$c_built_round"
+	# generate version will be tagged
+	v_release_pre=$(npm run semver --silent -- $v_meta -i patch)
+	v_release="$v_release_pre+$c_built_round"
 	# override package.json's version
 	node $DIR/override-package-version.js $v_release
 	# stage pacakge.json
@@ -46,11 +47,11 @@ then
 	cat > $c_file <<- EOM
 		:pacakge: up to $v_release
 
-		built with https://github.com/github/gemoji/commit/$c_built
+		auto release with https://github.com/github/gemoji/commit/$c_built
 		EOM
 	# commit, tag
 	git commit -F $c_file
 	git tag $v_release
 	# push it
-	git push git@github.com:prezzemolo/pictograph.git master $v_release
+	git push git@github.com:prezzemolo/pictograph.git HEAD:master $v_release
 fi

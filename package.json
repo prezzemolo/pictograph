@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node ./generator/index.js",
     "test": "npm run lint && npm run build && mocha",
-    "lint": "standard 'generator/**/*.js'"
+    "lint": "standard 'generator/**/*.js'",
+    "semver": "semver"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "debug": "^3.1.0",
     "mocha": "^3.4.2",
+    "semver": "^5.4.1",
     "standard": "^10.0.2"
   }
 }
