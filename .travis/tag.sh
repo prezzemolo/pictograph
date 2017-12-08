@@ -44,12 +44,13 @@ then
 	# create commit summary
 	c_file=$(mktemp)
 	cat > $c_file <<- EOM
-		:pacakge: up to $v_release
+		:package: up to $v_release
 
 		auto release with https://github.com/github/gemoji/commit/$c_built
 		EOM
 	# commit, tag
-	git commit -F $c_file
+	git commit -F $c_file \
+		--author='prezzemolo <git@prezzemolo.ga>'
 	git tag $v_release
 	# push it
 	git push git@github.com:prezzemolo/pictograph.git HEAD:master $v_release
