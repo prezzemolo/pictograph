@@ -49,7 +49,7 @@ debug com: $GIT_SSH_COMMAND
 npm run build --silent
 
 # get gemoji commit from latest git tag
-c_tag=$(git describe --tags $(git rev-list --tags --remotes --max-count=1) | cut -d+ -f2)
+c_tag=$(git tag -l | tail -n 1 | cut -d+ -f2)
 debug "c_tag: $c_tag"
 # get gemoji commit from builted
 c_built=$(node -e "console.log(require('$DIR/../release').version)")
