@@ -1,18 +1,27 @@
 pictograph
 =====
-[![][mit-badge]][mit] [![][npm-badge]][npm] [![][travis-badge]][travis] [![][greenkeeper-badge]][greenkeeper]  
-minimalized gemoji dictionaly.  
-reduced size by up to 90%, 300 KB to 20 KB.  
-this module doesn't include ligatures emoji.
+[![][mit-badge]][mit] [![][npm-badge]][npm] [![][travis-badge]][travis]  
+[gemoji](https://github.com/github/gemoji) based minimum dictionaly
 
-Installation
------
-```
-npm install pictograph
+About
+---
+an emoji dictionaly based on [emoji.json](https://github.com/github/gemoji/blob/master/db/emoji.json), but only needs 10% of the capacity compared with it.
+
+Note
+---
+- automatic tracking updates on gemoji with Travis CI Cron Jobs.
+- this module include no ligature emoji(s).
+
+Installing
+---
+Using npm:
+
+```bash
+$ npm install pictograph
 ```
 
-Example
------
+Examples
+---
 ```js
 const pictograph = require("pictograph")
 console.log(pictograph.dic["100"]) // '💯'
@@ -22,17 +31,17 @@ console.log(pictograph.meta.version) // '2.1.0'
 ```
 
 Properties
------
+---
 name|type|description
 ---|---|---
-dic|object|minimalized gemoji dictionaly
-version|string|git commit hash of contained gemoji database
-hash|string|git object hash of gemoji database
-decode|function|emoji code decoder
+dic|object|gemoji based minimum dictionaly
+version|string|git commit hash of gemoji used
+hash|string|git object hash of emoji.json used
+decode|function|convert emoji name to emoji charactor
 meta.version|string|pictograph pacakge version
 
 License
------
+---
 The MIT License. See [LICENSE](LICENSE).
 
 [mit]: http://opensource.org/licenses/MIT
@@ -41,5 +50,3 @@ The MIT License. See [LICENSE](LICENSE).
 [npm-badge]: https://badge.fury.io/js/pictograph.svg
 [travis]: https://travis-ci.org/prezzemolo/pictograph/
 [travis-badge]: https://travis-ci.org/prezzemolo/pictograph.svg?branch=master
-[greenkeeper]: https://greenkeeper.io/
-[greenkeeper-badge]: https://badges.greenkeeper.io/prezzemolo/pictograph.svg
