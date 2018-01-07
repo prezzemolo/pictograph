@@ -83,7 +83,7 @@ then
 		EOM
 	# commit, tag
 	git commit -F $c_file \
-		--author='prezzemolo <git@prezzemolo.ga>'
+		--author='prezzemolo <owner@prezzemolo.org>'
 	git tag $v_release
 	# push it
 	git push git@github.com:prezzemolo/pictograph.git HEAD:master $v_release
