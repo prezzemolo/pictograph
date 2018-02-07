@@ -63,7 +63,7 @@ debug v_current_npm: $v_current_npm
 v_current_built=$(node -e "console.log(require('$DIR/../release').meta.version.split('+')[0])")
 debug v_current_built: $v_current_built
 
-# temporary stop to use e option
+# temporary stop to use e option for checkings (see following lines)
 set +e
 
 # check source hash
