@@ -7,7 +7,8 @@
     "build": "node ./generator/index.js",
     "test": "npm run lint && npm run build && mocha",
     "lint": "standard 'generator/**/*.js'",
-    "semver": "semver"
+    "semver": "semver",
+    "semver-lt": "node ./.travis/check-left-version-lower-than-right-version.js"
   },
   "repository": {
     "type": "git",

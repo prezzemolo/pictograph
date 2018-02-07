@@ -56,14 +56,45 @@ c_built=$(node -e "console.log(require('$DIR/../release').version)")
 debug c_built: $c_built
 c_built_round=$(node -e "console.log(require('$DIR/../release').version.substr(0, 7))")
 debug c_built_round: $c_built_round
-# get current meta package version from npm
-v_current=$(npm info pictograph version --silent)
-debug v_current: $v_current
+# get current version on npm
+v_current_npm=$(npm info pictograph version --silent)
+debug v_current_npm: $v_current_npm
+# get current version on built
+v_current_built=$(node -e "console.log(require('$DIR/../release').meta.version.split('+')[0])")
+debug v_current_built: $v_current_built
 
-if [ "$c_tag" != "$c_built_round" ]
+# temporary stop to use e option
+set +e
+2018-02-07T09:53:09Z pictograph:tag ch_vlt: 0
+# check source hash
+[ "$c_tag" != "$c_built_round" ]
+ch_sh=$?
+debug ch_sh: $ch_sh
+if [ $ch_sh -eq 0 ]
+then
+  debug "there is a difference of source hash from last release"
+fi
+
+# check whether released version is lower than local version
+[ "$(npm run semver-lt --silent -- "$v_current_npm" "$v_current_built")" == "true" ]
+ch_vlt=$?
+debug ch_vlt: $ch_vlt
+if [ $ch_vlt -eq 0 ]
+then
+  debug "new version of generator detected"
+fi
+
+# re-enable e option
+set -e
+
+if [ $ch_sh -eq 0 ] || [ $ch_vlt -eq 0 ]
 then
 	# generate version will be tagged
-	v_release_pre=$(npm run semver --silent -- $v_current -i patch)
+	v_release_pre=$v_current_built
+	if [ $(npm run semver-lt --silent -- "$v_current_npm" "$v_current_built") == "false" ]
+	then
+		v_release_pre=$(npm run semver --silent -- $v_current_npm -i patch)
+	fi
 	debug v_release_pre: $v_release_pre
 	v_release="$v_release_pre+$c_built_round"
 	debug v_release: $v_release
