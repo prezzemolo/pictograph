@@ -21,7 +21,7 @@ jobs:
 stages:
   - test
   - name: tag
-    if: type = push AND branch = master
+    if: type IN (push, cron) AND branch = master
 
 deploy:
   provider: npm

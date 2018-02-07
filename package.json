@@ -1,19 +1,20 @@
 {
   "name": "pictograph",
-  "version": "2.1.6+61e16ae",
-  "description": "minimalized gemoji dictionaly.",
+  "version": "2.2.0",
+  "description": "gemoji based minimum dictionaly",
   "main": "./release/index.js",
   "scripts": {
     "build": "node ./generator/index.js",
     "test": "npm run lint && npm run build && mocha",
     "lint": "standard 'generator/**/*.js'",
-    "semver": "semver"
+    "semver": "semver",
+    "semver-lt": "node ./.travis/check-left-version-lower-than-right-version.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/prezzemolo/pictograph.git"
   },
-  "author": "prezzemolo <git@prezzemolo.ga>",
+  "author": "prezzemolo <owner@prezzemolo.org>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/prezzemolo/pictograph/issues"
