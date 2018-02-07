@@ -65,7 +65,7 @@ debug v_current_built: $v_current_built
 
 # temporary stop to use e option
 set +e
-2018-02-07T09:53:09Z pictograph:tag ch_vlt: 0
+
 # check source hash
 [ "$c_tag" != "$c_built_round" ]
 ch_sh=$?
