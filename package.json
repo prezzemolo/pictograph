@@ -1,6 +1,6 @@
 {
   "name": "pictograph",
-  "version": "2.1.5+61e16ae",
+  "version": "2.2.0",
   "description": "gemoji based minimum dictionaly",
   "main": "./release/index.js",
   "scripts": {
