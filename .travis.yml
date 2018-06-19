@@ -6,26 +6,25 @@ node_js:
 cache:
 - node_modules
 - release
-
 env:
   global:
-    - DEBUG=pictograph:*
-    - secure: YVgfJdqixhzspMvnVVo2aLHdP/EoZRVRvGR80cTEIx8+U2nxrVQ+apiU5uYNhXK0eIcsEHdQcZv8qbLk/X/fbNqVNSoa4OTwVGjXuBFMwyTExUpqfodQnetnSUSLhBf0wIgVgQTjeQDiz2hNnwi/g8ofDANgqQEITMjcZ3R+3ADQ7ZtFAKfEYGi0sfMH6ERCKQ/8gvoBucApWMMDn++14nfENMIMWvWCgppu069YCRSWzwYwxWrXUZtQ/Wa66Lx5qmbHWKtcqQVjbJ9OOTSlQbPV+upXfo8x9r/EuGmbgiC71MdVf9+O6A4YKPmW+AebHlE80xDcYbWWZbIQulOQqHL9r+VYHhJRPlx3LX/Ks6Q/7Eeg8DEhSGv7TcqggFMd6z/tx05nalSlIfviqJTdcn3hpxZQ2Bvco+pYN1rualKi2TjO9Kmaop0pCAPHTuoIvM28AnJvDHOLF9oFsGsr6E0qCOe6IgG4zJag6O4KCiPumbCtQNfC9iAGNR/3klSVaDzJ4JehF3/FgxTEBVXETjHHjHKG3S8KSMWWuGkMJOgqfnrF6SkStlNVl/4ALHJQb08l0U3VMjIhGn7/k5Rfw8fnLm5aQr2yVRQ31yjPrOsCuMBPGgg9UxvH5FJ/w5AJpVH6mtgmzMYF/fCjoSGYtL3iLYc6WQnUrlbjgl815Rg=
+  - DEBUG=pictograph:*
+  - secure: otzV2avL03oUdCEedmoCwR2IXuMdj1vNrkDV3GppP7IEfwyfgUWtfoVmxDIDSEeg6iBEetNvIOJDuI8RN5pJfaVuMRLigGGxxaS50yO+Zb5Cv7YjcxJ0n/M60CDl2VHikA8CiWbEJ6FZprK93La1hFlxj13pWD6yuMnRpJW78SzbykQWSpXVoUgeHSvPo973z2yKYiJ7AzTc6GiAUE2FPb6RItvicQyNNoLxEXVaI/pYDhBsVccBKh3zdVk0CQwbdobQUJxkvgwQXniSb279quNerc7c87kSKiSPrs9Wfc3L+HYFntU9w4wSQCbaCjvjdlIDjjRB+1ceYBfd/usMbUomTzLJPBPIGyj7FFWRwwsTl/CRESTcZq9BQcBmThmnqg1qTOqSvX2uiN8QRCuQZQG93ESRIiCkxAv3ubUn30px1lywvMaNGGr1zfbTE+Xl1lnd12Ly2w7SA4+UzqUtMfN54wTjO6KprO4E3/FhTFHMG4N3vgaf+0/sFQuyjNejf6EsMNXUNSzBntiOlDyrhadkWmZhMPuX5dGqak96do2PPGgWqsCRAq5gCzSBRpQcVttHOaAS4Io9dbZc6+i+rnqQL1I9M2iTiDGIj8sxjx4UE2ag6m1oQw2E55penmWd+GIh7nr5aEpr5ibvsE6ER2htfh1d0H/gpTDsbS14bUQ=
 
 jobs:
   include:
-    - stage: test
-    - stage: tag
-      script: ./.travis/tag.sh
+  - stage: test
+  - stage: tag
+    script: "./.travis/tag.sh"
 
 stages:
-  - test
-  - name: tag
-    if: type IN (push, cron) AND branch = master
+- test
+- name: tag
+  if: type IN (push, cron) AND branch = master
 
 deploy:
   provider: npm
-  email: contact@prezzemolo.ga
+  email: owner@prezzemolo.org
   api_key:
     secure: Kjkv25eg4mh4QL6dZOcSHNc2qAbzGR/RL1EZq+hCfNUhXKPGEwtFGFtt8uRpDUgp0xxXffmcAM4EJYtpZ8dPwjMKLWOJJwPRKoJgGF5Z6C1oUckgK4ZbU7MCPrrflN6RkHlLrj9LZkHrQ4i4xGKLpdQ7D2PIGtn0lNpZ4726TKntcrRV1SK3Il60iHlrCTqKwWwe0AnKRe8/F/SPbMWssp4AGKDDT94VzkItNs0qN7IUAAC2iDs4Q8X+OQnh3Of4oQ5wkihHOPAWMt3QI6kH6i+eoVc1vor2771NiL143wDeRiLJMdlhRjVBP0X6ASocylNmxUR3zfG3UsHdzu6flijnQuXZ9TE58RQ200x9w8ylq9E4Mwlh/awv4n3HNxVlhmxaYQivqQloOvSZLYsw+9ZcYsbe2rvMHuJ9N7wCSeUs0kGperqEjg7FitHpBf4WsD1a0UkMCt7CnAplPiN5Gpl1d0VQVnjsyZu9eXk0NkueHdkmQaAK40aY1WC+ktZuE2wOto1xFHJKPg5F3vOZUxcAN8HJRjPkL0n1XM/2Q8mtg9C0jB8wzV3jWLNCKAC+RNrC9+kLSDDFJR2HB+5JhYGVUVqmK7RCEmwRoSkfDXSD/pMR69vxaZvP9NsFQHWoTN4QemkWMaI4RzqZGXrPwiwiUCq2bKA/rM/F1TjGJ/0=
   on:
