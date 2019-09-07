@@ -9,4 +9,3 @@ try {
   console.error(e.stack)
   process.exit(1)
 }
-
