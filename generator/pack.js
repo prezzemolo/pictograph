@@ -77,13 +77,6 @@ module.exports = async () => {
     // oh, not Unicode's emoji (trollface etc)
     if (emoji === undefined) return
 
-    /**
-     * drop over 2 characters emoji. (include ligature)
-     * for support surrogate pair, referenced
-     *     http://qiita.com/sounisi5011/items/aa2d747322aad4850fe7#%E5%88%A5%E3%81%AE%E6%96%B9%E6%B3%95.
-     */
-    if (emoji.split(/(?![\uDC00-\uDFFF])/).length !== 1) return
-
     current.aliases.forEach(alias => {
       // check wheter alias is valid javaScript identifier
       const name = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(alias) ? alias : `"${alias}"`

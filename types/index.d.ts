@@ -4,7 +4,7 @@
  * @param input ":+1:"
  */
 export function decode(input: string): string
-export const dic: { [emojiName: string]: string }
+export const dic: { [emojiName: string]: string | undefined }
 export const version: string
 export const hash: string
 export const meta: { version: string }
